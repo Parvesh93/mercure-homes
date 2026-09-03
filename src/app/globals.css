@@ -1,0 +1,585 @@
+@import "tailwindcss";
+
+/* =========================================================
+   MERCURE HOMES — GLOBAL DESIGN TOKENS
+========================================================= */
+
+:root {
+  /* -----------------------------------------
+     Official Brand Palette
+  ----------------------------------------- */
+
+  --ivory-vein: #fff9f1;
+  --alabaster-mist: #efe8d9;
+
+  --gilded-ochre: #caa544;
+  --caramel-bronze: #855b2b;
+  --walnut-patina: #462b16;
+
+  --obsidian-slate: #1a1a1a;
+
+  /* -----------------------------------------
+     Semantic Colors
+  ----------------------------------------- */
+
+  --background: var(--ivory-vein);
+  --foreground: var(--obsidian-slate);
+
+  --surface: var(--alabaster-mist);
+  --surface-light: var(--ivory-vein);
+  --surface-dark: var(--obsidian-slate);
+
+  --text-primary: var(--obsidian-slate);
+
+  --text-secondary: rgba(26, 26, 26, 0.62);
+
+  --text-muted: rgba(26, 26, 26, 0.4);
+
+  --border: rgba(26, 26, 26, 0.14);
+
+  --brand-gold: var(--gilded-ochre);
+  --brand-bronze: var(--caramel-bronze);
+  --brand-walnut: var(--walnut-patina);
+
+  /* -----------------------------------------
+     Layout
+  ----------------------------------------- */
+
+  --container: 1440px;
+
+  --page-padding: clamp(
+    20px,
+    4vw,
+    72px
+  );
+
+  --section-space: clamp(
+    100px,
+    12vw,
+    190px
+  );
+}
+
+/* =========================================================
+   TAILWIND THEME
+========================================================= */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: "Lato", Arial, Helvetica, sans-serif;
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+
+  scroll-behavior: auto;
+
+  background: var(--background);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  min-height: 100vh;
+
+  overflow-x: hidden;
+
+  background: var(--background);
+  color: var(--foreground);
+
+  font-family:
+    "Lato",
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-weight: 400;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  appearance: none;
+}
+
+img,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection {
+  background: var(--walnut-patina);
+  color: var(--ivory-vein);
+}
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+/*
+ * Brand Guidelines:
+ *
+ * Century Gothic — Heading
+ * Juana          — Subheading / Editorial
+ * Lato           — Body
+ */
+
+.font-heading {
+  font-family:
+    "Century Gothic",
+    "Avenir Next",
+    Avenir,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+}
+
+.font-editorial {
+  font-family:
+    "Juana",
+    "Times New Roman",
+    Times,
+    serif;
+}
+
+/* -----------------------------------------
+   Display
+----------------------------------------- */
+
+.display-xl {
+  font-family:
+    "Century Gothic",
+    "Avenir Next",
+    Avenir,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  font-size: clamp(
+    52px,
+    8vw,
+    138px
+  );
+
+  font-weight: 400;
+
+  line-height: 0.92;
+
+  letter-spacing: -0.05em;
+}
+
+.display-lg {
+  font-family:
+    "Century Gothic",
+    "Avenir Next",
+    Avenir,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  font-size: clamp(
+    42px,
+    6vw,
+    96px
+  );
+
+  font-weight: 400;
+
+  line-height: 0.96;
+
+  letter-spacing: -0.04em;
+}
+
+.heading-md {
+  font-family:
+    "Century Gothic",
+    "Avenir Next",
+    Avenir,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  font-size: clamp(
+    30px,
+    4vw,
+    58px
+  );
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: -0.03em;
+}
+
+.editorial-text {
+  font-family:
+    "Juana",
+    "Times New Roman",
+    Times,
+    serif;
+
+  font-size: clamp(
+    26px,
+    3vw,
+    48px
+  );
+
+  line-height: 1.22;
+
+  font-weight: 400;
+}
+
+/* -----------------------------------------
+   Body
+----------------------------------------- */
+
+.body-lg {
+  font-size: clamp(
+    16px,
+    1.3vw,
+    20px
+  );
+
+  line-height: 1.75;
+
+  color: var(--text-secondary);
+}
+
+.body-sm {
+  font-size: 14px;
+
+  line-height: 1.75;
+
+  color: var(--text-secondary);
+}
+
+/* -----------------------------------------
+   Eyebrow
+----------------------------------------- */
+
+.eyebrow {
+  font-size: 10px;
+
+  line-height: 1;
+
+  letter-spacing: 0.24em;
+
+  text-transform: uppercase;
+
+  color: var(--text-secondary);
+}
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.site-container {
+  width: 100%;
+
+  max-width: var(--container);
+
+  margin-inline: auto;
+
+  padding-inline:
+    var(--page-padding);
+}
+
+.section-space {
+  padding-block:
+    var(--section-space);
+}
+
+/* =========================================================
+   DIVIDERS
+========================================================= */
+
+.hairline {
+  width: 100%;
+
+  height: 1px;
+
+  background:
+    var(--border);
+}
+
+.gold-line {
+  width: 48px;
+
+  height: 1px;
+
+  background:
+    var(--brand-gold);
+}
+
+/* =========================================================
+   DARK SECTIONS
+========================================================= */
+
+.dark-section {
+  --text-primary: var(--ivory-vein);
+
+  --text-secondary:
+    rgba(255, 249, 241, 0.65);
+
+  --text-muted:
+    rgba(255, 249, 241, 0.4);
+
+  --border:
+    rgba(255, 249, 241, 0.13);
+
+  background:
+    var(--obsidian-slate);
+
+  color:
+    var(--ivory-vein);
+}
+
+/* =========================================================
+   OPTIONAL BRAND PATTERN
+========================================================= */
+
+/*
+ * Brand guidelines allow pattern use
+ * at approximately 10–20% opacity.
+ *
+ * Apply this class only where needed.
+ */
+
+.brand-pattern {
+  position: relative;
+}
+
+.brand-pattern::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.12;
+
+  background-image:
+    url("/brand/patterns/mercure-pattern.svg");
+
+  background-repeat:
+    no-repeat;
+
+  background-position:
+    center;
+
+  background-size:
+    cover;
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background:
+    var(--ivory-vein);
+}
+
+::-webkit-scrollbar-thumb {
+  background:
+    rgba(70, 43, 22, 0.34);
+
+  border-radius:
+    999px;
+}
+
+/* =========================================================
+   HERO SCROLL INDICATOR
+========================================================= */
+
+@keyframes mercure-scroll-line {
+  0% {
+    transform:
+      translateY(-20px);
+  }
+
+  50% {
+    transform:
+      translateY(20px);
+  }
+
+  100% {
+    transform:
+      translateY(55px);
+  }
+}
+
+.hero-scroll-line {
+  animation:
+    mercure-scroll-line
+    2.2s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  a,
+  button,
+  [data-cursor] {
+    cursor: none;
+  }
+}
+
+.mercure-cursor {
+  width: 14px;
+  height: 14px;
+
+  background:
+    rgba(
+      255,
+      249,
+      241,
+      0.92
+    );
+
+  mix-blend-mode:
+    difference;
+
+  will-change:
+    transform,
+    width,
+    height;
+}
+
+.mercure-cursor-label {
+  background:
+    rgba(
+      255,
+      249,
+      241,
+      0.96
+    );
+
+  color:
+    var(--obsidian-slate);
+
+  mix-blend-mode:
+    normal;
+}
+
+@media (pointer: coarse) {
+  .mercure-cursor {
+    display:
+      none !important;
+  }
+
+  body {
+    cursor:
+      auto;
+  }
+
+  a,
+  button {
+    cursor:
+      pointer;
+  }
+}
+
+/* =========================================================
+   3D MATERIAL CANVAS
+========================================================= */
+
+.material-3d-canvas {
+  cursor:
+    grab;
+
+  touch-action:
+    pan-y;
+}
+
+.material-3d-canvas.is-dragging {
+  cursor:
+    grabbing;
+}
+
+@media (pointer: fine) {
+  .material-3d-canvas {
+    cursor:
+      none;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior:
+      auto !important;
+
+    transition-duration:
+      0.01ms !important;
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+  }
+
+  .hero-scroll-line {
+    animation:
+      none;
+  }
+}
