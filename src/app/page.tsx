@@ -12,6 +12,8 @@ import HomeCTA from "../components/home/HomeCTA";
 import BrandIdentityMotion from "../components/home/BrandIdentityMotion";
 
 import MaterialSculpture from "../components/home/MaterialSculpture";
+import BrandStrip from "../components/home/BrandStrip";
+import HeroVirtual from "../components/home/HeroVirtual";
 
 export default function Home() {
   return (
@@ -20,11 +22,15 @@ export default function Home() {
 
       <Hero />
 
+      <HeroVirtual/>
+
       <BrandIdentityMotion />
 
-      <BrandStatement />
+      <BrandStrip/>
 
-      <MaterialSculpture />
+      {/* <BrandStatement /> */}
+
+      {/* <MaterialSculpture /> */}
 
        <CollectionsPreview />
 

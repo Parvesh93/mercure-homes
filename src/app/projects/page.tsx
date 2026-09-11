@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import ProjectsHero from "../../components/projects/ProjectsHero";
 import ProjectsGrid from "../../components/projects/ProjectsGrid";
+import ProjectsPortfolio from "../../components/projects/ProjectsPortfolio";
 import HomeCTA from "../../components/home/HomeCTA";
 
 export const metadata: Metadata = {
@@ -14,10 +15,10 @@ export default function ProjectsPage() {
   return (
     <main>
       <ProjectsHero />
+      <ProjectsPortfolio />
+      {/* <ProjectsGrid /> */}
 
-      <ProjectsGrid />
-
-      <HomeCTA />
+      {/* <HomeCTA /> */}
     </main>
   );
 }

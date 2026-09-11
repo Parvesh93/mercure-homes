@@ -9,6 +9,9 @@ import AboutProcess from "../../components/about/AboutProcess";
 import LegacySection from "../../components/home/LegacySection";
 import HomeCTA from "../../components/home/HomeCTA";
 
+import ExperienceCentre from "../../components/about/ExperienceCentre";
+import SDPGroupSection from "@/src/components/about/SDPGroupSection";
+
 export const metadata: Metadata = {
   title: "About",
   description:
@@ -22,13 +25,17 @@ export default function AboutPage() {
 
       <AboutStory />
 
-      <AtelierSection />
+      <ExperienceCentre />
+
+      <SDPGroupSection/>
+
+      {/* <AtelierSection />
 
       <ValuesSection />
 
       <AboutProcess />
 
-      <LegacySection />
+      <LegacySection /> */}
 
       <HomeCTA />
     </main>

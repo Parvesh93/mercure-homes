@@ -8,7 +8,6 @@ import { getGSAP } from "../../lib/gsap";
 export default function ProjectsHero() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -25,22 +24,12 @@ export default function ProjectsHero() {
     const { gsap } = getGSAP();
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".projects-hero-label",
-        {
-          opacity: 0,
-          y: 18,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        }
-      );
+      /* =====================================
+         TITLE REVEAL
+      ====================================== */
 
       gsap.fromTo(
-        ".projects-hero-title-line",
+        ".projects-hero-line",
         {
           yPercent: 110,
         },
@@ -52,48 +41,44 @@ export default function ProjectsHero() {
         }
       );
 
+      /* =====================================
+         META / SUPPORTING COPY
+      ====================================== */
+
       gsap.fromTo(
-        ".projects-hero-ghost",
+        ".projects-hero-meta",
         {
           opacity: 0,
-          x: 50,
+          y: 20,
         },
         {
           opacity: 1,
-          x: 0,
-          duration: 1.4,
-          stagger: 0.08,
+          y: 0,
+          duration: 1,
+          delay: 0.5,
           ease: "power3.out",
         }
       );
 
-      gsap.fromTo(
-        lineRef.current,
-        {
-          scaleX: 0,
-        },
-        {
-          scaleX: 1,
-          duration: 1.2,
-          delay: 0.45,
-          ease: "power3.inOut",
-        }
-      );
+      /* =====================================
+         IMAGE INTRO
+      ====================================== */
 
       gsap.fromTo(
         image,
         {
-          clipPath: "inset(100% 0% 0% 0%)",
           scale: 1.08,
         },
         {
-          clipPath: "inset(0% 0% 0% 0%)",
           scale: 1,
-          duration: 1.5,
-          delay: 0.35,
-          ease: "power4.out",
+          duration: 2,
+          ease: "power2.out",
         }
       );
+
+      /* =====================================
+         IMAGE PARALLAX
+      ====================================== */
 
       gsap.to(image, {
         yPercent: 7,
@@ -112,98 +97,156 @@ export default function ProjectsHero() {
 
   return (
     <section
-  ref={sectionRef}
-  data-header-theme="light"
-  className="relative overflow-hidden bg-[var(--background)] pb-[clamp(90px,10vw,150px)] pt-[clamp(160px,16vw,240px)]"
->
-      <div className="site-container">
-        <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-          {/* LEFT */}
-<div className="flex flex-col">
-  <div>
-    <p className="projects-hero-label eyebrow text-[var(--text-secondary)]">
-      Projects
-    </p>
+      ref={sectionRef}
+      data-header-theme="dark"
+      className={[
+        "relative min-h-[100svh] overflow-hidden",
+        "bg-[var(--obsidian-slate)]",
+        "text-[var(--ivory-vein)]",
+      ].join(" ")}
+    >
+      {/* =====================================
+          BACKGROUND IMAGE
+      ====================================== */}
 
-    <div className="mt-[clamp(55px,7vw,100px)]">
-      <div className="overflow-hidden pb-[0.1em]">
-        <div className="projects-hero-title-line font-heading text-[clamp(54px,6vw,96px)] leading-[0.92] tracking-[-0.055em]">
-          Spaces shaped
-        </div>
+      <div
+        ref={imageRef}
+        className="absolute inset-[-4%] will-change-transform"
+      >
+        <Image
+          src="/images/projects/project-01.jpg"
+          alt="Mercure Homes project"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
       </div>
 
-      <div className="overflow-hidden pb-[0.12em]">
-        <div className="projects-hero-title-line font-editorial text-[clamp(54px,6vw,96px)] leading-[0.96] tracking-[-0.045em]">
-          around you.
-        </div>
+      {/* =====================================
+          BRAND OVERLAYS
+      ====================================== */}
+
+      <div className="absolute inset-0 bg-[var(--walnut-patina)]/18" />
+
+      <div
+        className={[
+          "absolute inset-0",
+          "bg-gradient-to-t",
+          "from-[var(--obsidian-slate)]/82",
+          "via-[var(--obsidian-slate)]/14",
+          "to-[var(--obsidian-slate)]/30",
+        ].join(" ")}
+      />
+
+      {/* extra left-side contrast for typography */}
+
+      <div
+        className={[
+          "absolute inset-0",
+          "bg-gradient-to-r",
+          "from-[var(--obsidian-slate)]/38",
+          "via-transparent",
+          "to-transparent",
+        ].join(" ")}
+      />
+
+      {/* =====================================
+          SUBTLE BRAND WARMTH
+      ====================================== */}
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+      >
+        <div className="absolute left-[8%] top-[18%] h-[360px] w-[360px] rounded-full bg-[var(--gilded-ochre)]/[0.03] blur-[140px]" />
       </div>
-    </div>
-  </div>
 
-  <div className="mt-[clamp(36px,4vw,60px)] max-w-[650px]">
-    <div
-      ref={lineRef}
-      className="mb-6 h-px w-[82%] origin-left bg-black/15"
-    />
+      {/* =====================================
+          CONTENT
+      ====================================== */}
 
-    <p className="projects-hero-label text-[15px] leading-[1.75] text-[var(--text-secondary)] md:text-[16px]">
-      Selected residential, hospitality and turnkey interiors,
-      developed through material, proportion and deeply personal
-      design decisions.
-    </p>
-  </div>
-</div>
+      <div className="site-container relative z-10 flex min-h-[100svh] items-end pb-[10vh] pt-36">
+        <div className="w-full">
+          {/* =================================
+              META
+          ================================== */}
 
-          {/* RIGHT */}
-          <div className="relative min-h-[560px] lg:min-h-[640px]">
-            {/* Ghost typography */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute right-0 top-0 select-none text-right"
-            >
-              <div className="projects-hero-ghost font-heading text-[clamp(70px,8vw,128px)] leading-[0.82] tracking-[-0.07em] text-black/[0.035]">
-                PROJECTS
-              </div>
+          <div className="projects-hero-meta mb-8 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <span className="h-px w-8 bg-[var(--brand-gold)]" />
 
-              <div className="projects-hero-ghost font-heading text-[clamp(70px,8vw,128px)] leading-[0.82] tracking-[-0.07em] text-black/[0.025]">
-                PROJECTS
-              </div>
+              <p className="eyebrow !text-[var(--brand-gold)]">
+                Projects
+              </p>
+            </div>
 
-              <div className="projects-hero-ghost font-heading text-[clamp(70px,8vw,128px)] leading-[0.82] tracking-[-0.07em] text-black/[0.018]">
-                PROJECTS
+            <span className="hidden text-[9px] uppercase tracking-[0.24em] text-[var(--alabaster-mist)]/48 md:block">
+              Selected Work
+            </span>
+          </div>
+
+          {/* =================================
+              TITLE
+          ================================== */}
+
+          <div
+            className={[
+              "max-w-[1200px]",
+              "text-[clamp(54px,8vw,128px)]",
+              "leading-[0.9]",
+              "tracking-[-0.055em]",
+            ].join(" ")}
+          >
+            <div className="overflow-hidden pb-[0.08em]">
+              <div className="projects-hero-line font-heading">
+                Spaces shaped
               </div>
             </div>
 
-            {/* Image strip */}
-            <div
-              ref={imageRef}
-              className="absolute bottom-0 right-0 w-[72%] overflow-hidden will-change-transform max-lg:w-[82%]"
-            >
-              <div className="relative aspect-[4/5]">
-                <Image
-                  src="/images/projects/project-01.jpg"
-                  alt="Mercure Homes project"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 82vw, 40vw"
-                  className="object-cover"
-                />
-
-                <div className="absolute inset-0 bg-black/[0.04]" />
-              </div>
-
-              <div className="mt-4 flex items-center justify-between">
-                <span className="text-[9px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                  Selected Work
-                </span>
-
-                <span className="text-[9px] tracking-[0.18em] text-[var(--text-muted)]">
-                  01
-                </span>
+            <div className="overflow-hidden pb-[0.1em]">
+              <div className="projects-hero-line font-editorial">
+                around you.
               </div>
             </div>
           </div>
+
+          {/* =================================
+              SOURCE COPY
+          ================================== */}
+
+          <div className="projects-hero-meta mt-10 max-w-[760px]">
+            <p className="text-[15px] font-light leading-[1.85] text-[var(--alabaster-mist)]/70 md:text-[17px]">
+              A glimpse of our most recent residences and show
+              spaces, each composed around its site, its light,
+              and the people who live in it.
+            </p>
+
+            {/* subtle bottom cue */}
+
+            <div className="mt-7 flex items-center gap-4">
+              <span className="h-px w-10 bg-[var(--brand-gold)]/65" />
+
+              <p className="text-[9px] uppercase tracking-[0.22em] text-[var(--alabaster-mist)]/45">
+                Scroll to explore
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* =====================================
+          PROJECT INDEX
+      ====================================== */}
+
+      <div className="projects-hero-meta absolute bottom-[10vh] right-[var(--page-padding)] z-10 hidden items-end gap-3 lg:flex">
+        <span className="font-heading text-[24px] leading-none tracking-[-0.04em] text-[var(--ivory-vein)]">
+          01
+        </span>
+
+        <span className="pb-[2px] text-[8px] tracking-[0.2em] text-[var(--alabaster-mist)]/38">
+          / 05
+        </span>
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import CategoryGrid from "../../components/collections/CategoryGrid";
 import MaterialStories from "../../components/collections/MaterialStories";
 import CustomisationStatement from "../../components/collections/CustomisationStatement";
 import HomeCTA from "../../components/home/HomeCTA";
+import CollectionsMoodboard from "@/src/components/collections/CollectionsMoodboard";
 
 export const metadata: Metadata = {
   title: "Collections",
@@ -16,6 +17,8 @@ export default function CollectionsPage() {
   return (
     <main>
       <CollectionsHero />
+
+      <CollectionsMoodboard/>
 
       <CategoryGrid />
 
