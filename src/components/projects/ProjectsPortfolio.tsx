@@ -503,17 +503,19 @@ function HelloBaliExplorer({
           handlePointerLeave
         }
         className={[
-          "relative",
-          "aspect-[16/9]",
-          "min-h-[420px]",
-          "overflow-hidden",
-          "select-none",
-          "bg-[var(--obsidian-slate)]",
+  "relative",
+  "aspect-[4/5]",
+  "min-h-[520px]",
+  "overflow-hidden",
+  "select-none",
+  "bg-[#ede8df]",
+  "md:aspect-[16/9]",
+  "md:min-h-[420px]",
 
-          zoom > MIN_ZOOM
-            ? "cursor-grab active:cursor-grabbing"
-            : "",
-        ].join(" ")}
+  zoom > MIN_ZOOM
+    ? "cursor-grab active:cursor-grabbing"
+    : "",
+].join(" ")}
         style={{
           perspective:
             "1400px",
@@ -529,17 +531,18 @@ function HelloBaliExplorer({
         ================================== */}
 
         <div
-          className={[
-            "absolute inset-[-3%]",
-            "will-change-transform",
-            "transition-transform",
+  className={[
+    "absolute",
+    "inset-0",
+    "will-change-transform",
+    "transition-transform",
 
-            isDragging
-              ? "duration-0"
-              : "duration-500",
+    isDragging
+      ? "duration-0"
+      : "duration-500",
 
-            "ease-[cubic-bezier(0.22,1,0.36,1)]",
-          ].join(" ")}
+    "ease-[cubic-bezier(0.22,1,0.36,1)]",
+  ].join(" ")}
           style={{
             transform: `
               translate3d(
@@ -562,7 +565,11 @@ function HelloBaliExplorer({
             priority
             draggable={false}
             sizes="100vw"
-            className="pointer-events-none object-cover"
+            className={[
+  "pointer-events-none",
+  "object-contain",
+  "md:object-cover",
+].join(" ")}
           />
         </div>
 
@@ -624,7 +631,10 @@ function HelloBaliExplorer({
           }}
           className={[
             "absolute",
-            "right-5 top-5",
+            "bottom-5 right-5",
+"md:bottom-auto",
+"md:right-7",
+"md:top-7",
             "z-30",
             "flex",
             "overflow-hidden",
