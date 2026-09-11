@@ -128,19 +128,19 @@ function ProcessObject({
 
   return (
     <div className="relative h-full w-full">
-      {/* outer circles */}
+      {/* OUTER CIRCLES */}
 
       <div className="absolute left-1/2 top-1/2 aspect-square w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--walnut-patina)]/10" />
 
       <div className="absolute left-1/2 top-1/2 aspect-square w-[61%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--walnut-patina)]/[0.07]" />
 
-      {/* guides */}
+      {/* GUIDES */}
 
       <div className="absolute left-1/2 top-[14%] h-[72%] w-px bg-[var(--walnut-patina)]/[0.06]" />
 
       <div className="absolute left-[14%] top-1/2 h-px w-[72%] bg-[var(--walnut-patina)]/[0.06]" />
 
-      {/* morphing object */}
+      {/* MORPHING OBJECT */}
 
       <div
         className={[
@@ -183,7 +183,7 @@ function ProcessObject({
         <div className="absolute left-0 top-1/2 h-px w-full bg-[var(--brand-gold)]/18" />
       </div>
 
-      {/* moving point */}
+      {/* MOVING POINT */}
 
       <span
         className={[
@@ -205,7 +205,7 @@ function ProcessObject({
         <span className="absolute inset-[-7px] rounded-full border border-[var(--brand-gold)]/20" />
       </span>
 
-      {/* large number */}
+      {/* LARGE NUMBER */}
 
       <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none">
         <span
@@ -216,7 +216,7 @@ function ProcessObject({
           className={[
             "block",
             "font-heading",
-            "text-[clamp(150px,16vw,260px)]",
+            "text-[clamp(120px,30vw,260px)]",
             "leading-none",
             "tracking-[-0.09em]",
             "text-[var(--walnut-patina)]/[0.045]",
@@ -255,6 +255,11 @@ export default function ProcessJourney() {
       Array<HTMLElement | null>
     >([]);
 
+  const mobileStepRefs =
+    useRef<
+      Array<HTMLElement | null>
+    >([]);
+
   const [
     activeStep,
     setActiveStep,
@@ -269,52 +274,27 @@ export default function ProcessJourney() {
     100;
 
   /* =========================================================
-     GSAP PIN + STEP ACTIVATION
+     GSAP
   ========================================================= */
 
   useEffect(() => {
     const section =
       sectionRef.current;
 
-    const pinWrap =
-      pinWrapRef.current;
+    if (!section) return;
 
-    const leftPanel =
-      leftPanelRef.current;
-
-    const rightPanel =
-      rightPanelRef.current;
-
-    if (
-      !section ||
-      !pinWrap ||
-      !leftPanel ||
-      !rightPanel
-    ) {
-      return;
-    }
-
-    const desktop =
-      window.matchMedia(
-        "(min-width: 1024px)"
-      ).matches;
+    const {
+      gsap,
+      ScrollTrigger,
+    } = getGSAP();
 
     const reduceMotion =
       window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
 
-    if (
-      !desktop ||
-      reduceMotion
-    ) {
-      return;
-    }
-
-    const {
-      gsap,
-      ScrollTrigger,
-    } = getGSAP();
+    const mm =
+      gsap.matchMedia();
 
     const ctx =
       gsap.context(() => {
@@ -322,87 +302,161 @@ export default function ProcessJourney() {
            INTRO
         ============================================== */
 
-        gsap.fromTo(
-          ".process-intro",
-          {
-            opacity: 0,
-            y: 24,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            ease:
-              "power3.out",
-
-            scrollTrigger: {
-              trigger:
-                section,
-              start:
-                "top 82%",
-              once: true,
+        if (!reduceMotion) {
+          gsap.fromTo(
+            ".process-intro",
+            {
+              opacity: 0,
+              y: 24,
             },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.9,
+              ease:
+                "power3.out",
+
+              scrollTrigger: {
+                trigger:
+                  section,
+
+                start:
+                  "top 82%",
+
+                once: true,
+              },
+            }
+          );
+        }
+
+        /* =============================================
+           DESKTOP
+        ============================================== */
+
+        mm.add(
+          "(min-width: 1024px)",
+          () => {
+            const pinWrap =
+              pinWrapRef.current;
+
+            const leftPanel =
+              leftPanelRef.current;
+
+            const rightPanel =
+              rightPanelRef.current;
+
+            if (
+              !pinWrap ||
+              !leftPanel ||
+              !rightPanel
+            ) {
+              return;
+            }
+
+            /* PIN LEFT */
+
+            ScrollTrigger.create({
+              trigger:
+                pinWrap,
+
+              start:
+                "top top",
+
+              endTrigger:
+                rightPanel,
+
+              end:
+                "bottom bottom",
+
+              pin:
+                leftPanel,
+
+              pinSpacing:
+                false,
+
+              anticipatePin:
+                1,
+
+              invalidateOnRefresh:
+                true,
+            });
+
+            /* ACTIVE STEP */
+
+            stepRefs.current.forEach(
+              (
+                step,
+                index
+              ) => {
+                if (!step) return;
+
+                ScrollTrigger.create(
+                  {
+                    trigger:
+                      step,
+
+                    start:
+                      "top 52%",
+
+                    end:
+                      "bottom 48%",
+
+                    onEnter:
+                      () =>
+                        setActiveStep(
+                          index
+                        ),
+
+                    onEnterBack:
+                      () =>
+                        setActiveStep(
+                          index
+                        ),
+                  }
+                );
+              }
+            );
           }
         );
 
         /* =============================================
-           PIN LEFT PANEL
+           MOBILE / TABLET
         ============================================== */
 
-        ScrollTrigger.create({
-          trigger: pinWrap,
+        mm.add(
+          "(max-width: 1023px)",
+          () => {
+            mobileStepRefs.current.forEach(
+              (
+                step,
+                index
+              ) => {
+                if (!step) return;
 
-          start: "top top",
+                ScrollTrigger.create(
+                  {
+                    trigger:
+                      step,
 
-          endTrigger:
-            rightPanel,
+                    start:
+                      "top 58%",
 
-          end: "bottom bottom",
+                    end:
+                      "bottom 42%",
 
-          pin:
-            leftPanel,
+                    onEnter:
+                      () =>
+                        setActiveStep(
+                          index
+                        ),
 
-          pinSpacing: false,
-
-          anticipatePin: 1,
-
-          invalidateOnRefresh:
-            true,
-        });
-
-        /* =============================================
-           ACTIVE STEP
-        ============================================== */
-
-        stepRefs.current.forEach(
-          (
-            step,
-            index
-          ) => {
-            if (!step) return;
-
-            ScrollTrigger.create(
-              {
-                trigger:
-                  step,
-
-                start:
-                  "top 52%",
-
-                end:
-                  "bottom 48%",
-
-                onEnter:
-                  () =>
-                    setActiveStep(
-                      index
-                    ),
-
-                onEnterBack:
-                  () =>
-                    setActiveStep(
-                      index
-                    ),
+                    onEnterBack:
+                      () =>
+                        setActiveStep(
+                          index
+                        ),
+                  }
+                );
               }
             );
           }
@@ -411,12 +465,14 @@ export default function ProcessJourney() {
         ScrollTrigger.refresh();
       }, section);
 
-    return () =>
+    return () => {
+      mm.revert();
       ctx.revert();
+    };
   }, []);
 
   /* =========================================================
-     CLICK STEP
+     DESKTOP STEP CLICK
   ========================================================= */
 
   const selectStep = (
@@ -437,6 +493,28 @@ export default function ProcessJourney() {
     });
   };
 
+  /* =========================================================
+     MOBILE STEP CLICK
+  ========================================================= */
+
+  const selectMobileStep = (
+    index: number
+  ) => {
+    setActiveStep(index);
+
+    const element =
+      mobileStepRefs.current[
+        index
+      ];
+
+    if (!element) return;
+
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -444,6 +522,7 @@ export default function ProcessJourney() {
       className={[
         "relative",
         "overflow-x-clip",
+        "overflow-y-visible",
         "bg-[var(--alabaster-mist)]",
         "text-[var(--obsidian-slate)]",
       ].join(" ")}
@@ -875,68 +954,183 @@ export default function ProcessJourney() {
           MOBILE / TABLET
       ================================================== */}
 
-      <div className="site-container py-[clamp(90px,12vw,140px)] lg:hidden">
-        <div className="flex items-center gap-4">
-          <span className="h-px w-8 bg-[var(--brand-gold)]" />
+      <div className="site-container pb-[110px] pt-[90px] lg:hidden">
+        {/* HEADER */}
 
-          <p className="eyebrow !text-[var(--brand-gold)]">
-            The Process
-          </p>
+        <div className="process-intro flex items-center justify-between gap-5">
+          <div className="flex items-center gap-4">
+            <span className="h-px w-8 bg-[var(--brand-gold)]" />
+
+            <p className="eyebrow !text-[var(--brand-gold)]">
+              The Process
+            </p>
+          </div>
+
+          <span className="text-[8px] uppercase tracking-[0.22em] text-[var(--walnut-patina)]/38">
+            {
+              current.number
+            }{" "}
+            / 06
+          </span>
         </div>
 
-        {/* PROGRESS */}
+        {/* =============================================
+            STICKY VISUAL
+        ============================================== */}
 
-        <div className="mt-10 flex items-center gap-2">
-          {steps.map(
-            (
-              step,
-              index
-            ) => (
-              <button
+        <div
+          className={[
+            "sticky",
+            "top-[68px]",
+            "z-20",
+            "mt-8",
+            "border-b",
+            "border-[var(--walnut-patina)]/10",
+            "bg-[var(--alabaster-mist)]/95",
+            "pb-5",
+            "pt-3",
+            "backdrop-blur-md",
+          ].join(" ")}
+        >
+          {/* VISUAL */}
+
+          <div
+            className={[
+              "relative",
+              "mx-auto",
+              "aspect-[16/9]",
+              "w-full",
+              "max-h-[280px]",
+              "overflow-hidden",
+            ].join(" ")}
+          >
+            <ProcessObject
+              active={
+                activeStep
+              }
+            />
+          </div>
+
+          {/* ACTIVE SUMMARY */}
+
+          <div className="mt-2 flex items-end justify-between gap-5">
+            <div>
+              <p
                 key={
-                  step.number
+                  current.eyebrow
                 }
-                type="button"
-                aria-label={`View ${step.title}`}
-                onClick={() =>
-                  setActiveStep(
-                    index
-                  )
-                }
-                className="relative h-[3px] flex-1 overflow-hidden bg-[var(--walnut-patina)]/12"
+                className={[
+                  "animate-[processCopy_450ms_ease-out]",
+                  "text-[8px]",
+                  "uppercase",
+                  "tracking-[0.2em]",
+                  "text-[var(--brand-gold)]",
+                ].join(" ")}
               >
-                <span
-                  className={[
-                    "absolute inset-0",
-                    "origin-left",
-                    "bg-[var(--brand-gold)]",
-                    "transition-transform",
-                    "duration-500",
+                {
+                  current.eyebrow
+                }
+              </p>
 
-                    index <=
-                    activeStep
-                      ? "scale-x-100"
-                      : "scale-x-0",
-                  ].join(" ")}
-                />
-              </button>
-            )
-          )}
+              <h3
+                key={
+                  current.title
+                }
+                className={[
+                  "animate-[processCopy_450ms_ease-out]",
+                  "font-editorial",
+                  "mt-2",
+                  "text-[clamp(31px,9vw,44px)]",
+                  "leading-none",
+                  "tracking-[-0.04em]",
+                ].join(" ")}
+              >
+                {
+                  current.title
+                }
+              </h3>
+            </div>
+
+            <span className="mb-2 h-[6px] w-[6px] shrink-0 rounded-full bg-[var(--brand-gold)]" />
+          </div>
+
+          {/* PROGRESS NAV */}
+
+          <div className="mt-5 flex items-center gap-[6px]">
+            {steps.map(
+              (
+                step,
+                index
+              ) => {
+                const isActive =
+                  index ===
+                  activeStep;
+
+                const complete =
+                  index <
+                  activeStep;
+
+                return (
+                  <button
+                    key={
+                      step.number
+                    }
+                    type="button"
+                    aria-label={`Go to ${step.title}`}
+                    onClick={() =>
+                      selectMobileStep(
+                        index
+                      )
+                    }
+                    className={[
+                      "relative",
+                      "h-[3px]",
+                      "flex-1",
+                      "overflow-hidden",
+                      "bg-[var(--walnut-patina)]/12",
+                    ].join(" ")}
+                  >
+                    <span
+                      className={[
+                        "absolute",
+                        "inset-0",
+                        "origin-left",
+                        "bg-[var(--brand-gold)]",
+                        "transition-transform",
+                        "duration-500",
+
+                        isActive ||
+                        complete
+                          ? "scale-x-100"
+                          : "scale-x-0",
+                      ].join(" ")}
+                    />
+                  </button>
+                );
+              }
+            )}
+          </div>
         </div>
 
-        {/* VISUAL */}
+        {/* =============================================
+            MOBILE STEPS
+        ============================================== */}
 
-        <div className="relative mt-10 aspect-[4/3] overflow-hidden">
-          <ProcessObject
-            active={
-              activeStep
-            }
+        <div className="relative mt-6">
+          {/* LINE */}
+
+          <div
+            aria-hidden="true"
+            className={[
+              "absolute",
+              "bottom-0",
+              "left-[6px]",
+              "top-0",
+              "w-px",
+              "bg-[var(--walnut-patina)]/10",
+            ].join(" ")}
           />
-        </div>
 
-        {/* ACCORDION */}
-
-        <div className="mt-8 border-t border-[var(--walnut-patina)]/12">
           {steps.map(
             (
               step,
@@ -951,121 +1145,156 @@ export default function ProcessJourney() {
                   key={
                     step.number
                   }
-                  className="border-b border-[var(--walnut-patina)]/12"
+                  ref={(
+                    element
+                  ) => {
+                    mobileStepRefs.current[
+                      index
+                    ] =
+                      element;
+                  }}
+                  className={[
+                    "relative",
+                    "min-h-[58svh]",
+                    "border-b",
+                    "border-[var(--walnut-patina)]/10",
+                    "pb-16",
+                    "pl-9",
+                    "pt-16",
+                  ].join(" ")}
                 >
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setActiveStep(
-                        index
-                      )
-                    }
-                    className="w-full py-6 text-left"
-                  >
-                    <div className="flex items-start justify-between gap-6">
-                      <div className="flex min-w-0 gap-5">
-                        <span
-                          className={[
-                            "pt-[4px]",
-                            "text-[9px]",
-                            "tracking-[0.18em]",
+                  {/* NODE */}
 
-                            isActive
-                              ? "text-[var(--brand-gold)]"
-                              : "text-[var(--walnut-patina)]/38",
+                  <span
+                    className={[
+                      "absolute",
+                      "left-0",
+                      "top-[69px]",
+                      "flex",
+                      "items-center",
+                      "justify-center",
+                      "rounded-full",
+                      "border",
+                      "bg-[var(--alabaster-mist)]",
+                      "transition-all",
+                      "duration-500",
+
+                      isActive
+                        ? [
+                            "h-[13px]",
+                            "w-[13px]",
+                            "border-[var(--brand-gold)]",
                           ].join(
                             " "
-                          )}
-                        >
-                          {
-                            step.number
-                          }
-                        </span>
+                          )
+                        : [
+                            "h-[9px]",
+                            "w-[9px]",
+                            "border-[var(--walnut-patina)]/22",
+                          ].join(
+                            " "
+                          ),
+                    ].join(" ")}
+                  >
+                    {isActive && (
+                      <span className="h-[4px] w-[4px] rounded-full bg-[var(--brand-gold)]" />
+                    )}
+                  </span>
 
-                        <div>
-                          <p className="text-[8px] uppercase tracking-[0.2em] text-[var(--walnut-patina)]/42">
-                            {
-                              step.eyebrow
-                            }
-                          </p>
+                  {/* NUMBER */}
 
-                          <h2
-                            className={[
-                              "font-editorial",
-                              "mt-2",
-                              "text-[clamp(36px,9vw,54px)]",
-                              "leading-none",
-                              "tracking-[-0.04em]",
+                  <span
+                    className={[
+                      "font-heading",
+                      "text-[12px]",
+                      "tracking-[0.03em]",
+                      "transition-colors",
 
-                              isActive
-                                ? "text-[var(--obsidian-slate)]"
-                                : "text-[var(--walnut-patina)]/55",
-                            ].join(
-                              " "
-                            )}
-                          >
-                            {
-                              step.title
-                            }
-                          </h2>
-                        </div>
-                      </div>
+                      isActive
+                        ? "text-[var(--brand-gold)]"
+                        : "text-[var(--walnut-patina)]/35",
+                    ].join(" ")}
+                  >
+                    {
+                      step.number
+                    }
+                  </span>
 
-                      <span
-                        className={[
-                          "flex",
-                          "h-8",
-                          "w-8",
-                          "shrink-0",
-                          "items-center",
-                          "justify-center",
-                          "rounded-full",
-                          "border",
-                          "transition-transform",
-                          "duration-500",
+                  {/* EYEBROW */}
 
-                          isActive
-                            ? [
-                                "rotate-45",
-                                "border-[var(--brand-gold)]",
-                                "text-[var(--brand-gold)]",
-                              ].join(
-                                " "
-                              )
-                            : [
-                                "border-[var(--walnut-patina)]/15",
-                                "text-[var(--walnut-patina)]/40",
-                              ].join(
-                                " "
-                              ),
-                        ].join(
-                          " "
-                        )}
-                      >
-                        +
-                      </span>
-                    </div>
+                  <p
+                    className={[
+                      "mt-5",
+                      "text-[8px]",
+                      "uppercase",
+                      "tracking-[0.2em]",
+                      "transition-colors",
+                      "duration-500",
 
-                    <div
-                      className={[
-                        "grid",
-                        "transition-all",
-                        "duration-700",
+                      isActive
+                        ? "text-[var(--brand-gold)]"
+                        : "text-[var(--walnut-patina)]/38",
+                    ].join(" ")}
+                  >
+                    {
+                      step.eyebrow
+                    }
+                  </p>
 
-                        isActive
-                          ? "grid-rows-[1fr] opacity-100"
-                          : "grid-rows-[0fr] opacity-0",
-                      ].join(" ")}
-                    >
-                      <div className="overflow-hidden">
-                        <p className="ml-[34px] mt-5 max-w-[580px] text-[14px] leading-[1.85] text-[var(--walnut-patina)]/65">
-                          {
-                            step.text
-                          }
-                        </p>
-                      </div>
-                    </div>
-                  </button>
+                  {/* TITLE */}
+
+                  <h2
+                    className={[
+                      "font-editorial",
+                      "mt-3",
+                      "text-[clamp(38px,11vw,54px)]",
+                      "leading-[0.98]",
+                      "tracking-[-0.04em]",
+                      "transition-colors",
+                      "duration-500",
+
+                      isActive
+                        ? "text-[var(--obsidian-slate)]"
+                        : "text-[var(--walnut-patina)]/52",
+                    ].join(" ")}
+                  >
+                    {
+                      step.title
+                    }
+                  </h2>
+
+                  {/* COPY */}
+
+                  <p
+                    className={[
+                      "mt-6",
+                      "max-w-[560px]",
+                      "text-[14px]",
+                      "leading-[1.85]",
+                      "transition-all",
+                      "duration-500",
+
+                      isActive
+                        ? [
+                            "translate-y-0",
+                            "text-[var(--walnut-patina)]/68",
+                            "opacity-100",
+                          ].join(
+                            " "
+                          )
+                        : [
+                            "translate-y-1",
+                            "text-[var(--walnut-patina)]/48",
+                            "opacity-70",
+                          ].join(
+                            " "
+                          ),
+                    ].join(" ")}
+                  >
+                    {
+                      step.text
+                    }
+                  </p>
                 </article>
               );
             }
