@@ -27,6 +27,14 @@ const helloBali = {
 };
 
 /* =========================================================
+   VIEWER CONFIG
+========================================================= */
+
+const MIN_ZOOM = 1;
+const MAX_ZOOM = 3.5;
+const ZOOM_STEP = 0.25;
+
+/* =========================================================
    OTHER PROJECTS
 ========================================================= */
 
@@ -37,7 +45,7 @@ const projects = [
     location: "Kanakapura",
     sqft: "50,000 sq ft",
     scope: "Modular · Loose Furniture · Lighting",
-    image: "/images/projects/shriyaamvita.jpg",
+    image: "/images/projects/project-02.jpg",
     href: "/projects/shriyaamvita",
     description:
       "A quiet dialogue between Kerala’s timeless sensibility and contemporary Bangalore, this residence is shaped by warmth, restraint, and an affinity with nature. Every layer — from furniture and lighting to finishes and textiles — was considered as part of a singular design language.",
@@ -48,7 +56,7 @@ const projects = [
     location: "Chandapura",
     sqft: "40,000 sq ft",
     scope: "Turnkey",
-    image: "/images/projects/grand-pavilion.jpg",
+    image: "/images/projects/project-02.jpg",
     href: "/projects/grand-pavilion",
     description:
       "A study in warm contemporary living, where every room is treated as its own considered chapter rather than a repeated formula. Travertine, marble, walnut-toned wood and soft leathers create a tactile interior built on restraint rather than ornament.",
@@ -59,7 +67,7 @@ const projects = [
     location: "Bengaluru",
     sqft: "Varies by unit",
     scope: "Turnkey · Furniture · Styling",
-    image: "/images/projects/model-flat.jpg",
+    image: "/images/projects/project-02.jpg",
     href: "/projects/model-flat-marketing-offices",
     description:
       "Show spaces crafted for builders, modular apartment units and corporate marketing offices, styled to sell a lifestyle to prospective buyers.",
@@ -70,7 +78,7 @@ const projects = [
     location: "Bengaluru",
     sqft: "18,000 sq ft",
     scope: "Experience Centre",
-    image: "/images/projects/mercure-studio.jpg",
+    image: "/images/projects/project-02.jpg",
     href: "/projects/mercure-studio",
     description:
       "Our own Bengaluru atelier and Experience Centre — the one project we are never finished refining.",
@@ -89,6 +97,7 @@ function HelloBaliExplorer({
   const stageRef = useRef<HTMLDivElement>(null);
 
   const draggingRef = useRef(false);
+  const resettingRef = useRef(false);
 
   const pointerStartRef = useRef({
     x: 0,
@@ -104,7 +113,7 @@ function HelloBaliExplorer({
     useState(false);
 
   const [zoom, setZoom] =
-    useState(1);
+    useState(MIN_ZOOM);
 
   const [pan, setPan] =
     useState({
@@ -123,11 +132,12 @@ function HelloBaliExplorer({
   ======================================================= */
 
   const resetViewer = () => {
+    resettingRef.current = true;
     draggingRef.current = false;
 
     setIsDragging(false);
 
-    setZoom(1);
+    setZoom(MIN_ZOOM);
 
     setPan({
       x: 0,
@@ -138,6 +148,10 @@ function HelloBaliExplorer({
       x: 0,
       y: 0,
     });
+
+    window.setTimeout(() => {
+      resettingRef.current = false;
+    }, 550);
   };
 
   /* =======================================================
@@ -153,12 +167,33 @@ function HelloBaliExplorer({
     if (!stage) return;
 
     /* ---------------------------------------
+       Do not let controls affect viewer
+    --------------------------------------- */
+
+    const target =
+      event.target as HTMLElement;
+
+    if (
+      target.closest(
+        "[data-viewer-control]"
+      )
+    ) {
+      return;
+    }
+
+    if (
+      resettingRef.current
+    ) {
+      return;
+    }
+
+    /* ---------------------------------------
        DRAG / PAN
     --------------------------------------- */
 
     if (
       draggingRef.current &&
-      zoom > 1
+      zoom > MIN_ZOOM
     ) {
       const dx =
         event.clientX -
@@ -168,23 +203,38 @@ function HelloBaliExplorer({
         event.clientY -
         pointerStartRef.current.y;
 
-      const limit =
-        110 * (zoom - 1);
+      const rect =
+        stage.getBoundingClientRect();
+
+      /*
+       * More zoom =
+       * more available pan area.
+       */
+
+      const maxPanX =
+        rect.width *
+        (zoom - MIN_ZOOM) *
+        0.32;
+
+      const maxPanY =
+        rect.height *
+        (zoom - MIN_ZOOM) *
+        0.32;
 
       setPan({
         x: Math.max(
-          -limit,
+          -maxPanX,
           Math.min(
-            limit,
+            maxPanX,
             panStartRef.current.x +
               dx
           )
         ),
 
         y: Math.max(
-          -limit,
+          -maxPanY,
           Math.min(
-            limit,
+            maxPanY,
             panStartRef.current.y +
               dy
           )
@@ -219,14 +269,26 @@ function HelloBaliExplorer({
         rect.top) /
       rect.height;
 
+    /*
+     * At higher zoom,
+     * reduce perspective tilt.
+     */
+
+    const tiltStrength =
+      zoom > MIN_ZOOM
+        ? 0.35
+        : 1;
+
     setTilt({
       x:
         (0.5 - y) *
-        4.5,
+        4.5 *
+        tiltStrength,
 
       y:
         (x - 0.5) *
-        5.5,
+        5.5 *
+        tiltStrength,
     });
   };
 
@@ -237,7 +299,22 @@ function HelloBaliExplorer({
   const handlePointerDown = (
     event: ReactPointerEvent<HTMLDivElement>
   ) => {
-    if (zoom <= 1) return;
+    const target =
+      event.target as HTMLElement;
+
+    if (
+      target.closest(
+        "[data-viewer-control]"
+      )
+    ) {
+      return;
+    }
+
+    if (
+      zoom <= MIN_ZOOM
+    ) {
+      return;
+    }
 
     draggingRef.current =
       true;
@@ -249,8 +326,10 @@ function HelloBaliExplorer({
       y: event.clientY,
     };
 
-    panStartRef.current =
-      pan;
+    panStartRef.current = {
+      x: pan.x,
+      y: pan.y,
+    };
 
     event.currentTarget.setPointerCapture(
       event.pointerId
@@ -286,7 +365,8 @@ function HelloBaliExplorer({
 
   const handlePointerLeave = () => {
     if (
-      !draggingRef.current
+      !draggingRef.current &&
+      !resettingRef.current
     ) {
       setTilt({
         x: 0,
@@ -302,8 +382,13 @@ function HelloBaliExplorer({
   const increaseZoom = () => {
     setZoom((current) =>
       Math.min(
-        2.2,
-        current + 0.25
+        MAX_ZOOM,
+        Number(
+          (
+            current +
+            ZOOM_STEP
+          ).toFixed(2)
+        )
       )
     );
   };
@@ -312,12 +397,24 @@ function HelloBaliExplorer({
     setZoom((current) => {
       const next =
         Math.max(
-          1,
-          current - 0.25
+          MIN_ZOOM,
+          Number(
+            (
+              current -
+              ZOOM_STEP
+            ).toFixed(2)
+          )
         );
 
-      if (next === 1) {
+      if (
+        next === MIN_ZOOM
+      ) {
         setPan({
+          x: 0,
+          y: 0,
+        });
+
+        setTilt({
           x: 0,
           y: 0,
         });
@@ -386,7 +483,7 @@ function HelloBaliExplorer({
       <div
         ref={stageRef}
         data-cursor={
-          zoom > 1
+          zoom > MIN_ZOOM
             ? "Drag"
             : "Explore"
         }
@@ -407,13 +504,13 @@ function HelloBaliExplorer({
         }
         className={[
           "relative",
-          "overflow-hidden",
-          "bg-[var(--obsidian-slate)]",
           "aspect-[16/9]",
           "min-h-[420px]",
+          "overflow-hidden",
           "select-none",
+          "bg-[var(--obsidian-slate)]",
 
-          zoom > 1
+          zoom > MIN_ZOOM
             ? "cursor-grab active:cursor-grabbing"
             : "",
         ].join(" ")}
@@ -422,13 +519,13 @@ function HelloBaliExplorer({
             "1400px",
 
           touchAction:
-            zoom > 1
+            zoom > MIN_ZOOM
               ? "none"
               : "pan-y",
         }}
       >
         {/* =================================
-            RENDER
+            IMAGE / TRANSFORM LAYER
         ================================== */}
 
         <div
@@ -469,7 +566,9 @@ function HelloBaliExplorer({
           />
         </div>
 
-        {/* overlays */}
+        {/* =================================
+            OVERLAYS
+        ================================== */}
 
         <div className="pointer-events-none absolute inset-0 bg-[var(--walnut-patina)]/[0.025]" />
 
@@ -488,7 +587,7 @@ function HelloBaliExplorer({
             VIEWER LABEL
         ================================== */}
 
-        <div className="pointer-events-none absolute left-6 top-6 md:left-8 md:top-8">
+        <div className="pointer-events-none absolute left-6 top-6 z-10 md:left-8 md:top-8">
           <p className="text-[8px] uppercase tracking-[0.22em] text-[var(--ivory-vein)]/70">
             Interactive Render
           </p>
@@ -507,9 +606,26 @@ function HelloBaliExplorer({
         ================================== */}
 
         <div
+          data-viewer-control
+          onPointerDown={(
+            event
+          ) => {
+            event.stopPropagation();
+          }}
+          onPointerMove={(
+            event
+          ) => {
+            event.stopPropagation();
+          }}
+          onPointerUp={(
+            event
+          ) => {
+            event.stopPropagation();
+          }}
           className={[
             "absolute",
             "right-5 top-5",
+            "z-30",
             "flex",
             "overflow-hidden",
             "border",
@@ -520,12 +636,26 @@ function HelloBaliExplorer({
             "md:top-7",
           ].join(" ")}
         >
+          {/* ZOOM OUT */}
+
           <button
             type="button"
-            onClick={
-              decreaseZoom
+            data-viewer-control
+            onPointerDown={(
+              event
+            ) => {
+              event.stopPropagation();
+            }}
+            onClick={(
+              event
+            ) => {
+              event.stopPropagation();
+
+              decreaseZoom();
+            }}
+            disabled={
+              zoom <= MIN_ZOOM
             }
-            disabled={zoom <= 1}
             className={[
               "flex h-11 w-11",
               "items-center justify-center",
@@ -534,6 +664,7 @@ function HelloBaliExplorer({
               "text-white",
               "transition-colors",
               "hover:bg-white/10",
+              "disabled:cursor-not-allowed",
               "disabled:opacity-30",
             ].join(" ")}
             aria-label="Zoom out"
@@ -541,20 +672,47 @@ function HelloBaliExplorer({
             −
           </button>
 
-          <div className="flex h-11 min-w-[58px] items-center justify-center text-[8px] tracking-[0.15em] text-white/70">
+          {/* ZOOM LEVEL */}
+
+          <div
+            data-viewer-control
+            className={[
+              "flex",
+              "h-11",
+              "min-w-[62px]",
+              "items-center",
+              "justify-center",
+              "px-2",
+              "text-[8px]",
+              "tracking-[0.15em]",
+              "text-white/70",
+            ].join(" ")}
+          >
             {Math.round(
               zoom * 100
             )}
             %
           </div>
 
+          {/* ZOOM IN */}
+
           <button
             type="button"
-            onClick={
-              increaseZoom
-            }
+            data-viewer-control
+            onPointerDown={(
+              event
+            ) => {
+              event.stopPropagation();
+            }}
+            onClick={(
+              event
+            ) => {
+              event.stopPropagation();
+
+              increaseZoom();
+            }}
             disabled={
-              zoom >= 2.2
+              zoom >= MAX_ZOOM
             }
             className={[
               "flex h-11 w-11",
@@ -564,6 +722,7 @@ function HelloBaliExplorer({
               "text-white",
               "transition-colors",
               "hover:bg-white/10",
+              "disabled:cursor-not-allowed",
               "disabled:opacity-30",
             ].join(" ")}
             aria-label="Zoom in"
@@ -571,9 +730,23 @@ function HelloBaliExplorer({
             +
           </button>
 
+          {/* RESET */}
+
           <button
             type="button"
-            onClick={resetViewer}
+            data-viewer-control
+            onPointerDown={(
+              event
+            ) => {
+              event.stopPropagation();
+            }}
+            onClick={(
+              event
+            ) => {
+              event.stopPropagation();
+
+              resetViewer();
+            }}
             className={[
               "flex h-11",
               "items-center",
@@ -583,7 +756,8 @@ function HelloBaliExplorer({
               "uppercase",
               "tracking-[0.18em]",
               "text-white/65",
-              "transition-colors",
+              "transition-all",
+              "duration-300",
               "hover:bg-white/10",
               "hover:text-white",
             ].join(" ")}
@@ -596,16 +770,27 @@ function HelloBaliExplorer({
             HELP
         ================================== */}
 
-        <div className="pointer-events-none absolute bottom-6 left-6 right-6 flex items-end justify-between md:bottom-8 md:left-8 md:right-8">
+        <div className="pointer-events-none absolute bottom-6 left-6 right-6 z-10 flex items-end justify-between md:bottom-8 md:left-8 md:right-8">
           <p className="max-w-[340px] text-[9px] uppercase leading-[1.7] tracking-[0.18em] text-white/60">
-            {zoom > 1
+            {zoom > MIN_ZOOM
               ? "Drag to inspect the render"
               : "Move your cursor across the render"}
           </p>
 
-          <span className="hidden text-[8px] uppercase tracking-[0.2em] text-white/40 md:block">
-            Hello Bali · 01
-          </span>
+          <div className="hidden items-center gap-5 md:flex">
+            {zoom > MIN_ZOOM && (
+              <span className="text-[8px] uppercase tracking-[0.18em] text-[var(--brand-gold)]">
+                {Math.round(
+                  zoom * 100
+                )}
+                % zoom
+              </span>
+            )}
+
+            <span className="text-[8px] uppercase tracking-[0.2em] text-white/40">
+              Hello Bali · 01
+            </span>
+          </div>
         </div>
       </div>
 
@@ -640,7 +825,9 @@ function HelloBaliExplorer({
 
           <button
             type="button"
-            onClick={onEnquire}
+            onClick={
+              onEnquire
+            }
             className={[
               "group mt-8",
               "flex items-center gap-5",
@@ -681,7 +868,9 @@ function ProjectCard({
 }) {
   return (
     <Link
-      href={project.href}
+      href={
+        project.href
+      }
       className="project-card group block"
     >
       <div
@@ -694,7 +883,9 @@ function ProjectCard({
         ].join(" ")}
       >
         <Image
-          src={project.image}
+          src={
+            project.image
+          }
           alt={`${project.title}, ${project.location}`}
           fill
           sizes="(max-width: 1024px) 100vw, 50vw"
@@ -729,12 +920,16 @@ function ProjectCard({
         </span>
 
         <span className="absolute right-6 top-6 text-[8px] uppercase tracking-[0.22em] text-white/65">
-          {project.location}
+          {
+            project.location
+          }
         </span>
 
         <div className="absolute bottom-6 left-6 right-6">
           <p className="text-[8px] uppercase tracking-[0.2em] text-[var(--brand-gold)]">
-            {project.scope}
+            {
+              project.scope
+            }
           </p>
 
           <h3
@@ -747,7 +942,9 @@ function ProjectCard({
               "text-[var(--ivory-vein)]",
             ].join(" ")}
           >
-            {project.title}
+            {
+              project.title
+            }
           </h3>
 
           <span className="mt-5 block h-px w-8 bg-[var(--brand-gold)] transition-all duration-700 group-hover:w-16" />
@@ -758,7 +955,9 @@ function ProjectCard({
         <div className="flex items-start justify-between gap-8">
           <div>
             <p className="font-heading text-[clamp(24px,2.2vw,34px)] leading-none tracking-[-0.04em]">
-              {project.sqft}
+              {
+                project.sqft
+              }
             </p>
 
             <p className="mt-2 text-[8px] uppercase tracking-[0.2em] text-[var(--brand-gold)]">
@@ -772,7 +971,9 @@ function ProjectCard({
         </div>
 
         <p className="mt-5 max-w-[620px] text-[13px] leading-[1.8] text-[var(--walnut-patina)]/60">
-          {project.description}
+          {
+            project.description
+          }
         </p>
       </div>
     </Link>
@@ -857,7 +1058,9 @@ function HelloBaliModal({
       >
         <button
           type="button"
-          onClick={onClose}
+          onClick={
+            onClose
+          }
           className={[
             "absolute",
             "right-5 top-5",
@@ -1014,12 +1217,15 @@ export default function ProjectsPortfolio() {
 
     if (reduceMotion) return;
 
-    const { gsap } =
-      getGSAP();
+    const {
+      gsap,
+    } = getGSAP();
 
     const ctx =
       gsap.context(() => {
-        /* intro */
+        /* =================================
+           INTRO
+        ================================== */
 
         gsap.fromTo(
           ".projects-grid-intro",
@@ -1031,19 +1237,24 @@ export default function ProjectsPortfolio() {
             opacity: 1,
             y: 0,
             duration: 0.9,
-            ease: "power3.out",
+            ease:
+              "power3.out",
 
             scrollTrigger: {
               trigger:
                 section,
+
               start:
                 "top 82%",
+
               once: true,
             },
           }
         );
 
-        /* hello bali */
+        /* =================================
+           HELLO BALI
+        ================================== */
 
         gsap.fromTo(
           ".hello-bali-feature",
@@ -1055,19 +1266,24 @@ export default function ProjectsPortfolio() {
             opacity: 1,
             y: 0,
             duration: 1.1,
-            ease: "power3.out",
+            ease:
+              "power3.out",
 
             scrollTrigger: {
               trigger:
                 ".hello-bali-feature",
+
               start:
                 "top 86%",
+
               once: true,
             },
           }
         );
 
-        /* regular cards */
+        /* =================================
+           REGULAR CARDS
+        ================================== */
 
         gsap.fromTo(
           ".project-card",
@@ -1080,13 +1296,16 @@ export default function ProjectsPortfolio() {
             y: 0,
             stagger: 0.08,
             duration: 0.85,
-            ease: "power3.out",
+            ease:
+              "power3.out",
 
             scrollTrigger: {
               trigger:
                 ".projects-grid",
+
               start:
                 "top 88%",
+
               once: true,
             },
           }
@@ -1100,35 +1319,19 @@ export default function ProjectsPortfolio() {
   return (
     <>
       <section
-        ref={sectionRef}
+        ref={
+          sectionRef
+        }
         data-header-theme="light"
         className={[
           "relative",
           "overflow-hidden",
           "bg-[var(--ivory-vein)]",
-          "py-[clamp(110px,12vw,180px)]",
+          "py-[clamp(110px,12vw,10px)]",
           "text-[var(--obsidian-slate)]",
         ].join(" ")}
       >
         <div className="site-container">
-          {/* =================================
-              INTRO
-          ================================== */}
-
-          <div className="projects-grid-intro flex items-end justify-between gap-8">
-            <div className="flex items-center gap-4">
-              <span className="h-px w-8 bg-[var(--brand-gold)]" />
-
-              <p className="eyebrow !text-[var(--brand-gold)]">
-                Selected Projects
-              </p>
-            </div>
-
-            <span className="hidden text-[9px] uppercase tracking-[0.22em] text-[var(--walnut-patina)]/40 md:block">
-              Portfolio · Bengaluru & Beyond
-            </span>
-          </div>
-
           {/* =================================
               HELLO BALI
           ================================== */}
@@ -1147,7 +1350,7 @@ export default function ProjectsPortfolio() {
               OTHER PROJECTS
           ================================== */}
 
-          <div className="mt-[clamp(110px,12vw,180px)]">
+          <div className="mt-[clamp(110px,12vw,80px)]">
             <div className="mb-[clamp(45px,5vw,70px)] flex items-center justify-between border-b border-[var(--walnut-patina)]/12 pb-5">
               <p className="text-[9px] uppercase tracking-[0.22em] text-[var(--brand-gold)]">
                 More Projects

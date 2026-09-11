@@ -21,16 +21,16 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "01",
-    slug: "the-quiet-residence",
-    title: "The Quiet Residence",
-    location: "Bengaluru",
+    slug: "hello-bali-20000-sq-ft",
+    title: "Hello Bali - 20,000 sq.ft",
+    location: "Tamil Nadu",
     category: "Residential",
     year: "2026",
     scope: "Interior Design & Execution",
     description:
-      "A warm contemporary residence shaped through layered materials, quiet tones and custom detailing.",
+      "Nestled in Tamil Nadu , Hello Bali is a turnkey sanctuary built around openness and quiet sophistication — proof of what full-scope execution looks like at scale",
     coverImage: "/images/projects/project-01.jpg",
-    href: "/projects/the-quiet-residence",
+    href: "/projects/hello-bali-20000-sq-ft",
     layout: "wide",
     featured: true,
   },
@@ -38,13 +38,13 @@ export const projects: Project[] = [
   {
     id: "02",
     slug: "house-of-stone",
-    title: "House of Stone",
-    location: "Bengaluru",
+    title: "Shriyaamvita, Kanakapura",
+    location: "Kerala",
     category: "Turnkey",
     year: "2026",
     scope: "Turnkey Interiors",
     description:
-      "Natural stone, custom furniture and measured proportions come together as one continuous composition.",
+      "A Kerala-inspired residence woven into its landscape, built across Three interconnected disciplines — modular, Sculpt : loose furniture and Miraé : lighting, all under one roof.",
     coverImage: "/images/projects/project-02.jpg",
     href: "/projects/house-of-stone",
     layout: "portrait",

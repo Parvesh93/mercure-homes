@@ -143,7 +143,7 @@ export default function AboutStory() {
 
       <div className="site-container relative z-10">
         {/* top label */}
-        <div className="about-story-label flex items-center justify-between">
+        {/* <div className="about-story-label flex items-center justify-between">
           <div className="flex items-center gap-4">
             <span className="h-px w-8 bg-[var(--brand-gold)]" />
 
@@ -155,31 +155,31 @@ export default function AboutStory() {
           <span className="hidden text-[9px] uppercase tracking-[0.22em] text-[var(--walnut-patina)]/42 md:block">
             Bengaluru · India
           </span>
-        </div>
+        </div> */}
 
         {/* main editorial statement */}
-        <div className="about-story-heading mt-[clamp(55px,7vw,95px)] max-w-[1120px]">
+        <div className="about-story-heading mt-[clamp(55px,7vw,15px)] max-w-[1120px]">
           <div className="overflow-hidden pb-[0.08em]">
             <div className="about-story-line font-heading text-[clamp(50px,6.3vw,96px)] leading-[0.95] tracking-[-0.05em]">
-              Personalisation is not
+              Brand Story
             </div>
           </div>
 
-          <div className="overflow-hidden pb-[0.1em]">
+          {/* <div className="overflow-hidden pb-[0.1em]">
             <div className="about-story-line font-editorial text-[clamp(50px,6.3vw,96px)] leading-[0.95] tracking-[-0.04em]">
               an option.
             </div>
-          </div>
+          </div> */}
 
-          <div className="overflow-hidden pb-[0.08em]">
+          {/* <div className="overflow-hidden pb-[0.08em]">
             <div className="about-story-line font-heading text-[clamp(50px,6.3vw,96px)] leading-[0.95] tracking-[-0.05em]">
               It is the starting point.
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* story composition */}
-        <div className="mt-[clamp(80px,9vw,135px)] grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:gap-[clamp(70px,8vw,130px)]">
+        <div className="mt-[clamp(80px,9vw,85px)] grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:gap-[clamp(70px,8vw,130px)]">
           {/* image */}
           <div className="about-story-image-wrap relative overflow-hidden">
             <div className="relative aspect-[4/5]">

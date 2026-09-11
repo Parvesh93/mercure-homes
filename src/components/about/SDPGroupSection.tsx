@@ -15,7 +15,7 @@ const companies = [
     number: "01",
     title: "SDP Machines",
     label: "Engineering",
-    image: "/images/about/sdp-machines.jpg",
+    image: "/images/legacy/sdp-machines.jpg",
     description:
       "Based in Ajmer, Rajasthan, South Asia's leading stone-processing machine manufacturer, exported globally.",
   },
@@ -23,7 +23,7 @@ const companies = [
     number: "02",
     title: "SDP Stones",
     label: "Material",
-    image: "/images/about/sdp-stones.jpg",
+    image: "/images/legacy/sdp-stones.webp",
     description:
       "Importers and processors of exotic natural stone, sourced from thirty-eight countries.",
   },
@@ -31,7 +31,7 @@ const companies = [
     number: "03",
     title: "Mercure Homes",
     label: "Interiors",
-    image: "/images/about/mercure-homes.jpg",
+    image: "/images/legacy/mercure-homes.jpg",
     description:
       "The Group's interior atelier, where material knowledge and engineering precision finally become a home.",
   },
@@ -581,7 +581,7 @@ export default function SDPGroupSection() {
         <div
           className={[
             "about-values",
-            "mt-[clamp(90px,9vw,135px)]",
+            "mt-[clamp(90px,9vw,55px)]",
             "border-t",
             "border-[var(--walnut-patina)]/12",
             "pt-[clamp(50px,5vw,70px)]",

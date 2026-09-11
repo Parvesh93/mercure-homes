@@ -200,15 +200,15 @@ export default function ProjectsHero() {
           >
             <div className="overflow-hidden pb-[0.08em]">
               <div className="projects-hero-line font-heading">
-                Spaces shaped
+                Our Projects
               </div>
             </div>
 
-            <div className="overflow-hidden pb-[0.1em]">
+            {/* <div className="overflow-hidden pb-[0.1em]">
               <div className="projects-hero-line font-editorial">
-                around you.
+                Projects
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* =================================
@@ -217,9 +217,7 @@ export default function ProjectsHero() {
 
           <div className="projects-hero-meta mt-10 max-w-[760px]">
             <p className="text-[15px] font-light leading-[1.85] text-[var(--alabaster-mist)]/70 md:text-[17px]">
-              A glimpse of our most recent residences and show
-              spaces, each composed around its site, its light,
-              and the people who live in it.
+              A glimpse of our most recent residences and show spaces, each composed around its site, its light, and the people who live in it. Per MOM: 2–3 sentences per project, sq ft always highlighted.
             </p>
 
             {/* subtle bottom cue */}

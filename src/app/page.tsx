@@ -14,6 +14,7 @@ import BrandIdentityMotion from "../components/home/BrandIdentityMotion";
 import MaterialSculpture from "../components/home/MaterialSculpture";
 import BrandStrip from "../components/home/BrandStrip";
 import HeroVirtual from "../components/home/HeroVirtual";
+import FurnitureSculptureSection from "../components/home/FurnitureSculptureSection";
 
 export default function Home() {
   return (
@@ -32,11 +33,13 @@ export default function Home() {
 
       {/* <MaterialSculpture /> */}
 
+      <FurnitureSculptureSection />
+
        <CollectionsPreview />
 
         <FeaturedProjects />
 
-        <CraftSection />
+        {/* <CraftSection /> */}
 
       <LegacySection />
 

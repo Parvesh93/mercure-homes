@@ -145,13 +145,13 @@ export default function AboutHero() {
               </p>
             </div>
 
-            <div className="hidden items-center gap-4 md:flex">
+            {/* <div className="hidden items-center gap-4 md:flex">
               <span className="text-[9px] uppercase tracking-[0.24em] text-[var(--alabaster-mist)]/48">
                 Bengaluru · India
               </span>
 
               <span className="h-px w-8 bg-[var(--brand-gold)]/45" />
-            </div>
+            </div> */}
           </div>
 
           {/* TITLE */}
@@ -166,21 +166,21 @@ export default function AboutHero() {
           >
             <div className="overflow-hidden pb-[0.08em]">
               <div className="about-hero-line font-heading">
-                A home is never
+                About Us
               </div>
             </div>
 
-            <div className="overflow-hidden pb-[0.1em]">
+            {/* <div className="overflow-hidden pb-[0.1em]">
               <div className="about-hero-line font-editorial">
                 simply furnished.
               </div>
-            </div>
+            </div> */}
 
-            <div className="overflow-hidden pb-[0.08em]">
+            {/* <div className="overflow-hidden pb-[0.08em]">
               <div className="about-hero-line font-heading">
                 It is composed.
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* SUPPORTING FACT */}

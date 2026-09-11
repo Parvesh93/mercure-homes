@@ -200,7 +200,7 @@ export default function ExperienceCentre() {
               </span>
             </h2>
 
-            <div className="shrink-0 lg:pb-2">
+            {/* <div className="shrink-0 lg:pb-2">
               <p className="font-heading text-[clamp(44px,4.5vw,72px)] leading-none tracking-[-0.05em] text-[var(--brand-gold)]">
                 18,000
               </p>
@@ -208,7 +208,7 @@ export default function ExperienceCentre() {
               <p className="mt-2 text-[9px] uppercase tracking-[0.22em] text-[var(--alabaster-mist)]/42">
                 sq ft · Bengaluru
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
 

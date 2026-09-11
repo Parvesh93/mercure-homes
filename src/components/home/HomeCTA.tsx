@@ -117,14 +117,12 @@ export default function HomeCTA() {
             {/* Content */}
             <div className="cta-content relative z-10 flex min-h-[620px] items-end p-8 text-white md:min-h-[720px] md:p-12 lg:p-16">
               <div className="max-w-[760px]">
-                <p className="mb-8 text-[10px] uppercase tracking-[0.28em] text-white/55">
+                {/* <p className="mb-8 text-[10px] uppercase tracking-[0.28em] text-white/55">
                   Begin Your Journey
-                </p>
+                </p> */}
 
                 <h2 className="font-heading text-[clamp(48px,6vw,92px)] leading-[0.96] tracking-[-0.055em]">
-                  Ready to make
-                  <br />
-                  it yours?
+                  Ready to begin?
                 </h2>
 
                 <p className="mt-8 max-w-[520px] text-[15px] leading-[1.8] text-white/65 md:text-[17px]">
@@ -139,7 +137,7 @@ export default function HomeCTA() {
                   className="group mt-10 flex w-fit items-center gap-5 text-[10px] uppercase tracking-[0.22em] text-white"
                 >
                   <span>
-                    Start a conversation
+                    Get in touch
                   </span>
 
                   <span className="relative block h-px w-14 overflow-hidden bg-white/35">

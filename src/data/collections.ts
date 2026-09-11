@@ -23,7 +23,7 @@ export const collections: CollectionItem[] = [
     title: "Modular",
     subtitle: "Kitchens & Wardrobes",
     description:
-      "Precision-engineered modular solutions shaped around your space, lifestyle and material preferences.",
+      "Kitchens and wardrobes, tailored to your space with a quiet attention to proportion, material and detail.",
     heroImage: "/images/collections/modular/hero.jpg",
     image: "/images/collections/modular.jpg",
     href: "/collections/modular",
@@ -67,11 +67,11 @@ export const collections: CollectionItem[] = [
 
   {
     id: "02",
-    slug: "custom-furniture",
-    title: "Custom Furniture",
+    slug: "terrain",
+    title: "Terrain",
     subtitle: "Furniture made for one home",
     description:
-      "Bespoke seating, tables, beds and statement pieces crafted to belong naturally within your interior.",
+      "Materials sourced across the globe, crafted in-house for the Indian landscape.",
     heroImage: "/images/collections/custom-furniture/hero.jpg",
     image: "/images/collections/furniture.jpg",
     href: "/collections/custom-furniture",
@@ -119,7 +119,7 @@ export const collections: CollectionItem[] = [
     title: "Soft Furnishings",
     subtitle: "Texture, comfort & detail",
     description:
-      "Custom carpets and made-to-measure furnishings that bring softness, warmth and individuality to a space.",
+      "Hand-tufted and hand-knotted carpets, made to measure.",
     heroImage: "/images/collections/soft-furnishings/hero.jpg",
     image: "/images/collections/soft-furnishings.jpg",
     href: "/collections/soft-furnishings",
@@ -167,7 +167,7 @@ export const collections: CollectionItem[] = [
     title: "Lighting",
     subtitle: "Decorative illumination",
     description:
-      "Custom-designed decorative lighting created to complement the architecture, material palette and mood of your home.",
+      "Alba Mirae : Lighting designed as an integral part of the interior, balancing sculptural form with asofter sense of illumination.",
     heroImage: "/images/collections/lighting/hero.jpg",
     image: "/images/collections/lighting.jpg",
     href: "/collections/lighting",
@@ -208,6 +208,103 @@ export const collections: CollectionItem[] = [
       },
     ],
   },
+
+  {
+    id: "05",
+    slug: "turnkey",
+    title: "Turnkey",
+    subtitle: "From concept to completion",
+    description:
+      "End-to-end design and execution, from the first line to the final detail.",
+    heroImage: "/images/collections/lighting/hero.jpg",
+    image: "/images/collections/soft-furnishings.jpg",
+    href: "/collections/turnkey",
+
+    intro:
+      "Decorative lighting becomes part of the architecture when proportion, finish and ambience are considered together. Each fixture is developed around the spatial and material language of the project.",
+
+    statement:
+      "Light designed as part of the room.",
+
+    gallery: [
+      "/images/collections/lighting/gallery-01.jpg",
+      "/images/collections/lighting/gallery-02.jpg",
+      "/images/collections/lighting/gallery-03.jpg",
+      "/images/collections/lighting/gallery-04.jpg",
+    ],
+
+    materials: [
+      {
+        name: "Metal Finishes",
+        description:
+          "Brass, bronze and refined metallic surfaces developed around the interior palette.",
+      },
+      {
+        name: "Glass",
+        description:
+          "Clear, textured and sculptural glass used to shape atmosphere and diffusion.",
+      },
+      {
+        name: "Stone",
+        description:
+          "Natural stone incorporated as a material and visual anchor.",
+      },
+      {
+        name: "Custom Finishes",
+        description:
+          "Surface treatments selected specifically for the surrounding architecture.",
+      },
+    ],
+  },
+
+  {
+    id: "06",
+    slug: "sculpt",
+    title: "Sculpt",
+    subtitle: "From concept to completion",
+    description:
+      "Loose furniture, sculpted around the rituals of everyday living.",
+    heroImage: "/images/collections/lighting/hero.jpg",
+    image: "/images/collections/furniture.jpg",
+    href: "/collections/sculpt",
+
+    intro:
+      "Decorative lighting becomes part of the architecture when proportion, finish and ambience are considered together. Each fixture is developed around the spatial and material language of the project.",
+
+    statement:
+      "Light designed as part of the room.",
+
+    gallery: [
+      "/images/collections/lighting/gallery-01.jpg",
+      "/images/collections/lighting/gallery-02.jpg",
+      "/images/collections/lighting/gallery-03.jpg",
+      "/images/collections/lighting/gallery-04.jpg",
+    ],
+
+    materials: [
+      {
+        name: "Metal Finishes",
+        description:
+          "Brass, bronze and refined metallic surfaces developed around the interior palette.",
+      },
+      {
+        name: "Glass",
+        description:
+          "Clear, textured and sculptural glass used to shape atmosphere and diffusion.",
+      },
+      {
+        name: "Stone",
+        description:
+          "Natural stone incorporated as a material and visual anchor.",
+      },
+      {
+        name: "Custom Finishes",
+        description:
+          "Surface treatments selected specifically for the surrounding architecture.",
+      },
+    ],
+  },
+
 ];
 
 export const homeCollections = collections;

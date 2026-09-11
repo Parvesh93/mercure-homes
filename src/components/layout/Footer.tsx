@@ -76,48 +76,7 @@ export default function Footer() {
             TOP BRAND STATEMENT
         ====================================== */}
 
-        <div className="border-b border-[var(--alabaster-mist)]/10 py-[clamp(70px,8vw,120px)]">
-          <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-            {/* LOGO */}
-
-            <div>
-              <Link
-                href="/"
-                aria-label="Mercure Homes"
-                className="inline-block"
-              >
-                <img
-                  src="/brand/logos/mercure-full-white.svg"
-                  alt="Mercure Homes"
-                  draggable={false}
-                  className="h-auto w-[150px] object-contain md:w-[165px]"
-                />
-              </Link>
-            </div>
-
-            {/* BRAND MESSAGE */}
-
-            <div>
-              <p className="text-[9px] uppercase tracking-[0.24em] text-[var(--brand-gold)]">
-                Crafting your story
-              </p>
-
-              <h2
-                className={[
-                  "mt-5 max-w-[850px]",
-                  "font-editorial",
-                  "text-[clamp(36px,4.5vw,68px)]",
-                  "leading-[1.04]",
-                  "tracking-[-0.035em]",
-                  "text-[var(--ivory-vein)]",
-                ].join(" ")}
-              >
-                Spaces made personal,
-                one statement at a time.
-              </h2>
-            </div>
-          </div>
-        </div>
+        
 
         {/* =====================================
             MAIN FOOTER

@@ -96,7 +96,7 @@ export default function TeamHero() {
         className="absolute inset-[-4%] will-change-transform"
       >
         <Image
-          src="/images/team/team-hero.jpg"
+          src="/images/team/team-hero-2.jpg"
           alt="Mercure Homes team at the Bengaluru studio"
           fill
           priority

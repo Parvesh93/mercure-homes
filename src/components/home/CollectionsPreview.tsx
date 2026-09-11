@@ -65,7 +65,7 @@ export default function CollectionsPreview() {
               scale: 1.07,
             },
             {
-              xPercent: 3,
+              xPercent: 5,
               scale: 1,
               ease: "none",
 

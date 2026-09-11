@@ -11,10 +11,10 @@ type HeaderTheme = "dark" | "light";
 
 const navItems = [
 
-  {
-    label: "HOME",
-    href: "/",
-  },
+  // {
+  //   label: "HOME",
+  //   href: "/",
+  // },
 
   {
     label: "ABOUT",

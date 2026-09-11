@@ -250,7 +250,7 @@ export default function LegacySection() {
       className={[
         "relative overflow-hidden",
         "bg-[var(--obsidian-slate)]",
-        "py-[clamp(130px,15vw,230px)]",
+        "py-[clamp(130px,15vw,130px)]",
         "text-[var(--ivory-vein)]",
       ].join(" ")}
     >
@@ -418,7 +418,7 @@ export default function LegacySection() {
             BRAND LINEAGE
         ====================================== */}
 
-        <div className="mt-[clamp(110px,12vw,180px)]">
+        <div className="mt-[clamp(110px,12vw,100px)]">
 
           <div className="mb-12 flex items-end justify-between">
             <div>
@@ -517,7 +517,7 @@ export default function LegacySection() {
         <div
           className={[
             "legacy-material",
-            "mt-[clamp(120px,14vw,210px)]",
+            "mt-[clamp(120px,14vw,130px)]",
             "grid gap-12",
             "border-t border-[var(--alabaster-mist)]/10",
             "pt-[clamp(60px,7vw,100px)]",
