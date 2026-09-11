@@ -10,21 +10,42 @@ import { usePathname } from "next/navigation";
 type HeaderTheme = "dark" | "light";
 
 const navItems = [
+
   {
-    label: "Collections",
-    href: "/collections",
+    label: "HOME",
+    href: "/",
   },
+
   {
-    label: "Projects",
-    href: "/projects",
-  },
-  {
-    label: "About",
+    label: "ABOUT",
     href: "/about",
   },
   {
-    label: "Process",
+    label: "COLLECTIONS",
+    href: "/collections",
+  },
+
+  {
+    label: "PROJECTS",
+    href: "/projects",
+  },
+  
+  {
+    label: "PROCESS",
     href: "/process",
+  },
+  {
+    label: "TEAM",
+    href: "/team",
+  },
+  {
+    label: "THE SDP GROUP",
+    href: "/sdp-group",
+  },
+
+  {
+    label: "CONTACT",
+    href: "/contact",
   },
 ];
 

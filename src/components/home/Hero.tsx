@@ -342,112 +342,105 @@ export default function Hero() {
             </h1>
 
             {/* =================================================
-                DESCRIPTION + CTAS
-            ================================================== */}
+    DESCRIPTION + CTAS
+================================================== */}
 
-            <div
-              className={[
-                "mt-9",
-                "flex flex-col",
-                "gap-9",
-                "md:mt-11",
-                "lg:flex-row",
-                "lg:items-end",
-                "lg:justify-between",
-              ].join(" ")}
-            >
-              {/* SOURCE SUB-HEADLINE */}
+<div className="mt-9 md:mt-11">
 
-              <p
-                ref={descriptionRef}
-                className={[
-                  "max-w-[650px]",
-                  "text-[14px]",
-                  "font-light",
-                  "leading-[1.85]",
-                  "text-[var(--alabaster-mist)]/72",
-                  "md:text-[16px]",
-                ].join(" ")}
-              >
-                A luxury interior atelier in Bengaluru, where
-                Italian design sensibility meets Indian
-                craftsmanship, carried forward by the SDP
-                Group&apos;s fifty-year legacy in stone and
-                precision manufacturing.
-              </p>
+  {/* DESCRIPTION */}
 
-              {/* CTAS */}
+  <p
+    ref={descriptionRef}
+    className={[
+      "max-w-[650px]",
+      "text-[14px]",
+      "font-light",
+      "leading-[1.85]",
+      "text-[var(--alabaster-mist)]/72",
+      "md:text-[16px]",
+    ].join(" ")}
+  >
+    A luxury interior atelier in Bengaluru, where
+    Italian design sensibility meets Indian
+    craftsmanship, carried forward by the SDP
+    Group&apos;s fifty-year legacy in stone and
+    precision manufacturing.
+  </p>
 
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
-                {/* PRIMARY */}
+  {/* CTAS */}
 
-                <Link
-                  ref={primaryCtaRef}
-                  href="/collections"
-                  className={[
-                    "group",
-                    "flex w-fit",
-                    "items-center gap-5",
-                    "text-[10px]",
-                    "font-medium",
-                    "uppercase",
-                    "tracking-[0.22em]",
-                    "!text-[var(--ivory-vein)]",
-                    "md:text-[11px]",
-                  ].join(" ")}
-                >
-                  <span>
-                    Explore Our World
-                  </span>
+  <div className="mt-8 flex flex-wrap items-center gap-x-10 gap-y-5 md:mt-9">
 
-                  <span className="relative block h-px w-12 overflow-hidden bg-[var(--alabaster-mist)]/35">
-                    <span
-                      className={[
-                        "absolute inset-0",
-                        "-translate-x-full",
-                        "bg-[var(--brand-gold)]",
-                        "transition-transform",
-                        "duration-700",
-                        "group-hover:translate-x-0",
-                      ].join(" ")}
-                    />
-                  </span>
+    {/* PRIMARY */}
 
-                  <span className="text-[var(--brand-gold)] transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
-                    ↗
-                  </span>
-                </Link>
+    <Link
+      ref={primaryCtaRef}
+      href="/collections"
+      className={[
+        "group",
+        "flex w-fit",
+        "items-center gap-5",
+        "text-[10px]",
+        "font-medium",
+        "uppercase",
+        "tracking-[0.22em]",
+        "!text-[var(--ivory-vein)]",
+        "md:text-[11px]",
+      ].join(" ")}
+    >
+      <span>
+        Explore Our World
+      </span>
 
-                {/* SECONDARY */}
+      <span className="relative block h-px w-12 overflow-hidden bg-[var(--alabaster-mist)]/35">
+        <span
+          className={[
+            "absolute inset-0",
+            "-translate-x-full",
+            "bg-[var(--brand-gold)]",
+            "transition-transform",
+            "duration-700",
+            "group-hover:translate-x-0",
+          ].join(" ")}
+        />
+      </span>
 
-                <Link
-                  ref={secondaryCtaRef}
-                  href="/contact"
-                  className={[
-                    "group",
-                    "flex w-fit",
-                    "items-center gap-4",
-                    "text-[9px]",
-                    "font-medium",
-                    "uppercase",
-                    "tracking-[0.20em]",
-                    "!text-[var(--alabaster-mist)]/58",
-                    "transition-colors",
-                    "duration-500",
-                    "hover:!text-[var(--ivory-vein)]",
-                    "md:text-[10px]",
-                  ].join(" ")}
-                >
-                  <span>
-                    Begin Your Project
-                  </span>
+      <span className="text-[var(--brand-gold)] transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
+        ↗
+      </span>
+    </Link>
 
-                  <span className="text-[var(--brand-gold)] transition-transform duration-500 group-hover:translate-x-1">
-                    →
-                  </span>
-                </Link>
-              </div>
-            </div>
+    {/* SECONDARY */}
+
+    <Link
+      ref={secondaryCtaRef}
+      href="/contact"
+      className={[
+        "group",
+        "flex w-fit",
+        "items-center gap-4",
+        "text-[9px]",
+        "font-medium",
+        "uppercase",
+        "tracking-[0.20em]",
+        "!text-[var(--alabaster-mist)]/58",
+        "transition-colors",
+        "duration-500",
+        "hover:!text-[var(--ivory-vein)]",
+        "md:text-[10px]",
+      ].join(" ")}
+    >
+      <span>
+        Begin Your Project
+      </span>
+
+      <span className="text-[var(--brand-gold)] transition-transform duration-500 group-hover:translate-x-1">
+        →
+      </span>
+    </Link>
+
+  </div>
+</div>
           </div>
         </div>
       </div>

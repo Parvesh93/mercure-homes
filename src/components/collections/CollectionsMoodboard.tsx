@@ -44,7 +44,7 @@ const products = [
     category: "Modular",
     subcategory: "Kitchen",
     image:
-      "/images/collections/marmo-island-kitchen.jpg",
+      "/images/collections/furniture.jpg",
     description:
       "An island kitchen built around a single slab of stone, engineered for the way a home actually gathers around food.",
   },
@@ -54,7 +54,7 @@ const products = [
     category: "Modular",
     subcategory: "Kitchen",
     image:
-      "/images/collections/vetro-handleless-kitchen.jpg",
+      "/images/collections/lighting.jpg",
     description:
       "Clean, handle-free cabinetry in soft-close precision — designed to disappear into the architecture around it.",
   },
@@ -64,7 +64,7 @@ const products = [
     category: "Modular",
     subcategory: "Wardrobe",
     image:
-      "/images/collections/custodia-walk-in-wardrobe.jpg",
+      "/images/collections/modular.jpg",
     description:
       "A walk-in wardrobe planned around what you actually own, not a standard module stretched to fit.",
   },
@@ -74,7 +74,7 @@ const products = [
     category: "Modular",
     subcategory: "Wardrobe",
     image:
-      "/images/collections/linea-sliding-wardrobe.jpg",
+      "/images/collections/soft-furnishings.jpg",
     description:
       "Slim-profile sliding wardrobes for rooms where every centimetre of floor space matters.",
   },
@@ -85,7 +85,7 @@ const products = [
     category: "Lighting",
     subcategory: "Alba Mirae",
     image:
-      "/images/collections/alba-mirae-chandelier.jpg",
+      "/images/collections/furniture.jpg",
     description:
       "A sculptural chandelier designed as the room's first sentence — the piece a space is planned around.",
   },
@@ -95,7 +95,7 @@ const products = [
     category: "Lighting",
     subcategory: "Alba Mirae",
     image:
-      "/images/collections/alba-mirae-pendant.jpg",
+      "/images/collections/lighting.jpg",
     description:
       "A single-drop pendant for entryways and dining tables, cast in warm, textured metal.",
   },
@@ -105,7 +105,7 @@ const products = [
     category: "Lighting",
     subcategory: "Mirae",
     image:
-      "/images/collections/mirae-wall-sconce.jpg",
+      "/images/collections/modular.jpg",
     description:
       "A quiet wall light for corridors and bedside walls, built for daily ambient use.",
   },
@@ -115,7 +115,7 @@ const products = [
     category: "Lighting",
     subcategory: "Mirae",
     image:
-      "/images/collections/mirae-table-lamp.jpg",
+      "/images/collections/soft-furnishings.jpg",
     description:
       "A considered bedside and console lamp, finished to complement Mercure's furniture metals.",
   },
@@ -126,7 +126,7 @@ const products = [
     category: "Terrain",
     subcategory: "Outdoor",
     image:
-      "/images/collections/terrain-lounge-chair.jpg",
+      "/images/collections/furniture.jpg",
     description:
       "A weather-rated lounge chair in teak and woven rope, built for balconies and poolside decks.",
   },
@@ -135,7 +135,7 @@ const products = [
     category: "Terrain",
     subcategory: "Outdoor",
     image:
-      "/images/collections/terrain-daybed.jpg",
+      "/images/collections/modular.jpg",
     description:
       "An outdoor daybed sized for long afternoons, finished to withstand Indian coastal climates.",
   },
@@ -145,7 +145,7 @@ const products = [
     category: "Terrain",
     subcategory: "Outdoor",
     image:
-      "/images/collections/terrain-dining-set.jpg",
+      "/images/collections/lighting.jpg",
     description:
       "A full outdoor dining set for terraces and courtyards, made to the proportions of your space.",
   },
@@ -155,7 +155,7 @@ const products = [
     category: "Sculpt",
     subcategory: "Indoor",
     image:
-      "/images/collections/sculpt-sofa.jpg",
+      "/images/collections/soft-furnishings.jpg",
     description:
       "A sofa built to the proportion of your living room, upholstered in fabrics and leathers chosen with you.",
   },
@@ -164,7 +164,7 @@ const products = [
     category: "Sculpt",
     subcategory: "Indoor",
     image:
-      "/images/collections/sculpt-armchair.jpg",
+      "/images/collections/modular.jpg",
     description:
       "A single accent chair, sculpted for reading corners and quiet rooms.",
   },
@@ -174,7 +174,7 @@ const products = [
     category: "Sculpt",
     subcategory: "Indoor",
     image:
-      "/images/collections/sculpt-coffee-table.jpg",
+      "/images/collections/furniture.jpg",
     description:
       "A coffee table in stone or wood, sized to sit at the centre of a considered living space.",
   },
@@ -183,7 +183,7 @@ const products = [
     category: "Sculpt",
     subcategory: "Indoor",
     image:
-      "/images/collections/sculpt-console.jpg",
+      "/images/collections/lighting.jpg",
     description:
       "An entryway or media console, finished to complement the metals and stones used elsewhere in the home.",
   },
@@ -193,7 +193,7 @@ const products = [
     subcategory:
       "Loose Furniture",
     image:
-      "/images/collections/bespoke-bed.jpg",
+      "/images/collections/soft-furnishings.jpg",
     description:
       "A custom bed frame and headboard, upholstered or in solid wood, sized to your room.",
   },
@@ -204,7 +204,7 @@ const products = [
     subcategory:
       "Loose Furniture",
     image:
-      "/images/collections/custom-dining-table.jpg",
+      "/images/collections/modular.jpg",
     description:
       "A dining table in stone or wood, seated to the number your family actually gathers.",
   },
@@ -215,7 +215,7 @@ const products = [
     subcategory:
       "Loose Furniture",
     image:
-      "/images/collections/occasional-console.jpg",
+      "/images/collections/furniture.jpg",
     description:
       "A standalone console for entryways, landings or media walls.",
   },
@@ -225,7 +225,7 @@ const products = [
     subcategory:
       "Loose Furniture",
     image:
-      "/images/collections/accent-bench.jpg",
+      "/images/collections/modular.jpg",
     description:
       "A single upholstered bench, made to sit at the foot of a bed or along a hallway.",
   },
@@ -237,7 +237,7 @@ const products = [
       "Soft Furnishings",
     subcategory: "Carpet",
     image:
-      "/images/collections/hand-knotted-silk-rug.jpg",
+      "/images/collections/soft-furnishings.jpg",
     description:
       "A fine hand-knotted silk rug, woven to your room's exact dimensions and palette.",
   },
@@ -248,7 +248,7 @@ const products = [
       "Soft Furnishings",
     subcategory: "Carpet",
     image:
-      "/images/collections/hand-tufted-wool-rug.jpg",
+      "/images/collections/lighting.jpg",
     description:
       "A hand-tufted wool rug in custom pattern and scale, built for daily, family-home use.",
   },
@@ -259,7 +259,7 @@ const products = [
       "Soft Furnishings",
     subcategory: "Carpet",
     image:
-      "/images/collections/custom-dhurrie.jpg",
+      "/images/collections/soft-furnishings.jpg",
     description:
       "A flat-weave dhurrie for casual and outdoor-adjacent spaces, made to measure.",
   },
@@ -529,7 +529,7 @@ export default function CollectionsMoodboard() {
           <div className="animate-[collectionFade_500ms_ease-out]">
             {/* PRODUCT INTRO */}
 
-            <div className="mt-[clamp(50px,5vw,75px)] grid gap-10 lg:grid-cols-[0.72fr_2.28fr]">
+            {/* <div className="mt-[clamp(50px,5vw,75px)] grid gap-10 lg:grid-cols-[0.72fr_2.28fr]">
               <div>
                 <div className="flex items-center gap-4">
                   <span className="h-px w-8 bg-[var(--brand-gold)]" />
@@ -559,7 +559,7 @@ export default function CollectionsMoodboard() {
                   </span>
                 </h2>
               </div>
-            </div>
+            </div> */}
 
             {/* =============================================
                 PRODUCT FILTERS
@@ -658,13 +658,13 @@ export default function CollectionsMoodboard() {
                   product,
                   index
                 ) => {
-                  const tall =
-                    index %
-                      5 ===
-                      0 ||
-                    index %
-                      7 ===
-                      3;
+                  // const tall =
+                  //   index %
+                  //     5 ===
+                  //     0 ||
+                  //   index %
+                  //     7 ===
+                  //     3;
 
                   return (
                     <article
@@ -674,19 +674,15 @@ export default function CollectionsMoodboard() {
                       className="collection-tile group"
                     >
                       <div
-                        data-cursor="Explore"
-                        className={[
-                          "relative",
-                          "overflow-hidden",
-                          "bg-[var(--ivory-vein)]",
-
-                          tall
-                            ? "aspect-[4/5]"
-                            : "aspect-[4/4.3]",
-                        ].join(
-                          " "
-                        )}
-                      >
+  data-cursor="Explore"
+  className={[
+    "relative",
+    "aspect-[4/5]",
+    "w-full",
+    "overflow-hidden",
+    "bg-[var(--ivory-vein)]",
+  ].join(" ")}
+>
                         <Image
                           src={
                             product.image
@@ -842,7 +838,7 @@ export default function CollectionsMoodboard() {
                 ].join(" ")}
               >
                 <Image
-                  src="/images/collections/turnkey.jpg"
+                  src="/images/home/hero-2.jpg"
                   alt="Mercure Homes turnkey interiors"
                   fill
                   sizes="(max-width: 1024px) 100vw, 58vw"

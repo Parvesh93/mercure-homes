@@ -378,52 +378,80 @@ export default function HeroVirtual() {
             </span>
           </h1>
 
-          <div className="mt-9 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-            <p className="hero-v-copy max-w-[650px] text-[14px] font-light leading-[1.85] text-white/72 md:text-[16px]">
-              A luxury interior atelier in Bengaluru, where
-              Italian design sensibility meets Indian
-              craftsmanship, carried forward by the SDP
-              Group&apos;s fifty-year legacy in stone and
-              precision manufacturing.
-            </p>
+          <div className="mt-9 md:mt-11">
+  <p
+    className={[
+      "hero-v-copy",
+      "max-w-[650px]",
+      "text-[14px]",
+      "font-light",
+      "leading-[1.85]",
+      "text-white/72",
+      "md:text-[16px]",
+    ].join(" ")}
+  >
+    A luxury interior atelier in Bengaluru, where
+    Italian design sensibility meets Indian
+    craftsmanship, carried forward by the SDP
+    Group&apos;s fifty-year legacy in stone and
+    precision manufacturing.
+  </p>
 
-            <div className="hero-v-actions flex flex-wrap items-center gap-7">
-              <button
-                type="button"
-                onClick={enterExplore}
-                className={[
-                  "group",
-                  "flex items-center gap-4",
-                  "text-[9px] uppercase tracking-[0.22em]",
-                ].join(" ")}
-              >
-                <span>
-                  Explore Space
-                </span>
+  <div className="hero-v-actions mt-8 flex flex-wrap items-center gap-x-9 gap-y-5 md:mt-9">
+    <button
+      type="button"
+      onClick={enterExplore}
+      className={[
+        "group",
+        "flex items-center gap-4",
+        "text-[9px]",
+        "uppercase",
+        "tracking-[0.22em]",
+      ].join(" ")}
+    >
+      <span>
+        Explore Space
+      </span>
 
-                <span
-                  className={[
-                    "flex h-11 w-11 items-center justify-center",
-                    "rounded-full",
-                    "border border-[var(--brand-gold)]/60",
-                    "text-[var(--brand-gold)]",
-                    "transition-all duration-400",
-                    "group-hover:bg-[var(--brand-gold)]",
-                    "group-hover:text-[var(--obsidian-slate)]",
-                  ].join(" ")}
-                >
-                  ↗
-                </span>
-              </button>
+      <span
+        className={[
+          "flex h-11 w-11 items-center justify-center",
+          "rounded-full",
+          "border border-[var(--brand-gold)]/60",
+          "text-[var(--brand-gold)]",
+          "transition-all duration-400",
+          "group-hover:bg-[var(--brand-gold)]",
+          "group-hover:text-[var(--obsidian-slate)]",
+        ].join(" ")}
+      >
+        ↗
+      </span>
+    </button>
 
-              <Link
-                href="/collections"
-                className="text-[9px] uppercase tracking-[0.2em] text-white/50 transition-colors hover:text-white"
-              >
-                Explore Our World
-              </Link>
-            </div>
-          </div>
+    <Link
+      href="/collections"
+      className={[
+        "group",
+        "flex items-center gap-4",
+        "text-[9px]",
+        "uppercase",
+        "tracking-[0.2em]",
+        "text-white/50",
+        "transition-colors",
+        "duration-300",
+        "hover:text-white",
+      ].join(" ")}
+    >
+      <span>
+        Explore Our World
+      </span>
+
+      <span className="text-[var(--brand-gold)] transition-transform duration-500 group-hover:translate-x-1">
+        →
+      </span>
+    </Link>
+  </div>
+</div>
         </div>
       </div>
 

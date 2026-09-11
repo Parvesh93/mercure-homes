@@ -24,7 +24,7 @@ export default function Home() {
 
       <HeroVirtual/>
 
-      <BrandIdentityMotion />
+      {/* <BrandIdentityMotion /> */}
 
       <BrandStrip/>
 

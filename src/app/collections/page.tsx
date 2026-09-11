@@ -20,11 +20,11 @@ export default function CollectionsPage() {
 
       <CollectionsMoodboard/>
 
-      <CategoryGrid />
+      {/* <CategoryGrid />
 
       <MaterialStories />
 
-      <CustomisationStatement />
+      <CustomisationStatement /> */}
 
       <HomeCTA />
     </main>
